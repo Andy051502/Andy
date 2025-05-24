@@ -78,26 +78,30 @@
   <div class="result" id="generatedNumber"></div>
 </div>
 
-<script>
+<!-- Load Firebase connection from firebase.js -->
+<script type="module">
+  import { app } from './firebase.js'; // firebase.js must be in same folder
+
   function register() {
-    // You can also add validation here if needed
     const name = document.getElementById("name").value;
     const parcel = document.getElementById("parcel").value;
     const matric = document.getElementById("matric").value;
     const phone = document.getElementById("phone").value;
 
-    if (!name  !parcel  !matric || !phone) {
+    if (!name || !parcel || !matric || !phone) {
       alert("Please fill in all fields!");
       return;
     }
 
-    // Generate a random 4-digit number
     const generatedCode = Math.floor(1000 + Math.random() * 9000);
-
-    // Show the generated number
-    document.getElementById("generatedNumber").textContent = 
+    document.getElementById("generatedNumber").textContent =
       "Your Code: " + generatedCode;
+
+    // TODO: Store in Firebase later
+    console.log("Data to store:", { name, parcel, matric, phone, generatedCode });
   }
+
+  window.register = register; // make function global for button
 </script>
 
 </body>
