@@ -1,21 +1,21 @@
-// firebase.js
-import { initializeApp } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-app.js";
-import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-analytics.js";
-import { getDatabase } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-database.js";
+// Import the functions you need from the SDKs you need
+import { initializeApp } from "firebase/app";
+import { getAnalytics } from "firebase/analytics";
+// TODO: Add SDKs for Firebase products that you want to use
+// https://firebase.google.com/docs/web/setup#available-libraries
 
+// Your web app's Firebase configuration
+// For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
-  apiKey: "AIzaSyCLoF99P6IgNGVcpfu86XOoxDAaX32S8Gw",
-  authDomain: "smartparcellocker-abfda.firebaseapp.com",
-  databaseURL: "https://smartparcellocker-abfda-default-rtdb.asia-southeast1.firebasedatabase.app",
-  projectId: "smartparcellocker-abfda",
-  storageBucket: "smartparcellocker-abfda.firebasestorage.app",
-  messagingSenderId: "840948905793",
-  appId: "1:840948905793:web:9d43e7af5df96917bbd3c0",
-  measurementId: "G-L3M5C0BP6L"
+  apiKey: "AIzaSyB_me46lP_QD482D-KfBm-6Q4_ukBuKjsI",
+  authDomain: "smartparcellocker-fb6bd.firebaseapp.com",
+  projectId: "smartparcellocker-fb6bd",
+  storageBucket: "smartparcellocker-fb6bd.firebasestorage.app",
+  messagingSenderId: "801398865847",
+  appId: "1:801398865847:web:2bfdc297a93661b4867232",
+  measurementId: "G-K0ZRBNBM9R"
 };
 
+// Initialize Firebase
 const app = initializeApp(firebaseConfig);
 const analytics = getAnalytics(app);
-const database = getDatabase(app);
-
-export { app, database };
