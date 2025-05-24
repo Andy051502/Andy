@@ -5,56 +5,100 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Parcel Registration</title>
   <style>
-    /* Existing CSS styles remain unchanged */
+    body {
+      font-family: Arial, sans-serif;
+      padding: 40px;
+      background: #f4f4f4;
+    }
+    .container {
+      max-width: 400px;
+      margin: auto;
+      padding: 20px;
+      background: white;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+    h2 {
+      text-align: center;
+      color: #333;
+    }
+    label {
+      display: block;
+      margin-top: 15px;
+      font-weight: bold;
+    }
+    input {
+      width: 100%;
+      padding: 10px;
+      margin-top: 5px;
+      border-radius: 4px;
+      border: 1px solid #ccc;
+    }
+    button {
+      margin-top: 20px;
+      width: 100%;
+      padding: 12px;
+      background-color: #007BFF;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #0056b3;
+    }
+    .result {
+      margin-top: 20px;
+      text-align: center;
+      font-size: 20px;
+      font-weight: bold;
+      color: green;
+    }
   </style>
-  <!-- Import Firebase SDK and local firebase.js -->
-  <script type="module">
-    import { getDatabase, ref, push } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-database.js";
-    import { app } from "./firebase.js";
-  </script>
 </head>
 <body>
-  <div class="container">
-    <!-- Existing HTML structure remains unchanged -->
-  </div>
 
-  <script>
-    async function register() {
-      // Get form values
-      const name = document.getElementById("name").value;
-      const parcel = document.getElementById("parcel").value;
-      const matric = document.getElementById("matric").value;
-      const phone = document.getElementById("phone").value;
+<div class="container">
+  <h2>Parcel Registration</h2>
+  <label for="name">Name</label>
+  <input type="text" id="name" required />
 
-      // Fix validation logic
-      if (!name || !parcel || !matric || !phone) {
-        alert("Please fill in all fields!");
-        return;
-      }
+  <label for="parcel">Parcel Number</label>
+  <input type="text" id="parcel" required />
 
-      // Generate 4-digit code
-      const generatedCode = Math.floor(1000 + Math.random() * 9000);
+  <label for="matric">Matric Number</label>
+  <input type="text" id="matric" required />
 
-      try {
-        // Save to Firebase Realtime Database
-        const database = getDatabase(app);
-        const parcelsRef = ref(database, 'parcels');
-        await push(parcelsRef, {
-          name: name,
-          parcelNumber: parcel,
-          matricNumber: matric,
-          phoneNumber: phone,
-          code: generatedCode,
-          timestamp: new Date().toISOString()
-        });
+  <label for="phone">Phone Number</label>
+  <input type="tel" id="phone" required />
 
-        // Show success message
-        document.getElementById("generatedNumber").textContent = 
-          `Your Code: ${generatedCode} (Saved successfully!)`;
-      } catch (error) {
-        alert("Error: " + error.message);
-      }
+  <button onclick="register()">Register</button>
+
+  <div class="result" id="generatedNumber"></div>
+</div>
+
+<script>
+  function register() {
+    // You can also add validation here if needed
+    const name = document.getElementById("name").value;
+    const parcel = document.getElementById("parcel").value;
+    const matric = document.getElementById("matric").value;
+    const phone = document.getElementById("phone").value;
+
+    if (!name  !parcel  !matric || !phone) {
+      alert("Please fill in all fields!");
+      return;
     }
-  </script>
+
+    // Generate a random 4-digit number
+    const generatedCode = Math.floor(1000 + Math.random() * 9000);
+
+    // Show the generated number
+    document.getElementById("generatedNumber").textContent = 
+      "Your Code: " + generatedCode;
+  }
+</script>
+
 </body>
 </html>
