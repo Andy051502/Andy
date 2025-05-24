@@ -1,108 +1,39 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Parcel Registration</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      padding: 40px;
-      background: #f4f4f4;
-    }
-    .container {
-      max-width: 400px;
-      margin: auto;
-      padding: 20px;
-      background: white;
-      border-radius: 8px;
-      box-shadow: 0 0 10px rgba(0,0,0,0.1);
-    }
-    h2 {
-      text-align: center;
-      color: #333;
-    }
-    label {
-      display: block;
-      margin-top: 15px;
-      font-weight: bold;
-    }
-    input {
-      width: 100%;
-      padding: 10px;
-      margin-top: 5px;
-      border-radius: 4px;
-      border: 1px solid #ccc;
-    }
-    button {
-      margin-top: 20px;
-      width: 100%;
-      padding: 12px;
-      background-color: #007BFF;
-      color: white;
-      border: none;
-      border-radius: 5px;
-      font-size: 16px;
-      cursor: pointer;
-    }
-    button:hover {
-      background-color: #0056b3;
-    }
-    .result {
-      margin-top: 20px;
-      text-align: center;
-      font-size: 20px;
-      font-weight: bold;
-      color: green;
-    }
-  </style>
-</head>
-<body>
+import { database } from './firebase.js';
+import { ref, push, set } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-database.js";
 
-<div class="container">
-  <h2>Parcel Registration</h2>
-  <label for="name">Name</label>
-  <input type="text" id="name" required />
+async function register() {
+  const name = document.getElementById("name").value;
+  const parcel = document.getElementById("parcel").value;
+  const matric = document.getElementById("matric").value;
+  const phone = document.getElementById("phone").value;
 
-  <label for="parcel">Parcel Number</label>
-  <input type="text" id="parcel" required />
-
-  <label for="matric">Matric Number</label>
-  <input type="text" id="matric" required />
-
-  <label for="phone">Phone Number</label>
-  <input type="tel" id="phone" required />
-
-  <button onclick="register()">Register</button>
-
-  <div class="result" id="generatedNumber"></div>
-</div>
-
-<!-- Load Firebase connection from firebase.js -->
-<script type="module">
-  import { app } from './firebase.js'; // firebase.js must be in same folder
-
-  function register() {
-    const name = document.getElementById("name").value;
-    const parcel = document.getElementById("parcel").value;
-    const matric = document.getElementById("matric").value;
-    const phone = document.getElementById("phone").value;
-
-    if (!name || !parcel || !matric || !phone) {
-      alert("Please fill in all fields!");
-      return;
-    }
-
-    const generatedCode = Math.floor(1000 + Math.random() * 9000);
-    document.getElementById("generatedNumber").textContent =
-      "Your Code: " + generatedCode;
-
-    // TODO: Store in Firebase later
-    console.log("Data to store:", { name, parcel, matric, phone, generatedCode });
+  if (!name || !parcel || !matric || !phone) {
+    alert("Please fill in all fields!");
+    return;
   }
 
-  window.register = register; // make function global for button
-</script>
+  const generatedCode = Math.floor(1000 + Math.random() * 9000);
+  document.getElementById("generatedNumber").textContent =
+    "Your Code: " + generatedCode;
 
-</body>
-</html>
+  try {
+    // Reference to 'parcels' node
+    const parcelsRef = ref(database, 'parcels');
+    // Generate a new unique key and get its reference
+    const newParcelRef = push(parcelsRef);
+    
+    await set(newParcelRef, {
+      name,
+      parcel,
+      matric,
+      phone,
+      generatedCode,
+      timestamp: Date.now()
+    });
+
+    alert("Parcel registered successfully!");
+  } catch (error) {
+    console.error("Error saving data:", error);
+    alert("Failed to register parcel.");
+  }
+}
