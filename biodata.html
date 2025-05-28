@@ -3,300 +3,895 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Your Name - Professional Portfolio</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', sans-serif;
-        }
-
-        :root {
-            --primary-color: #2ecc71;
-            --secondary-color: #27ae60;
-            --dark-color: #2c3e50;
-            --light-color: #ecf0f1;
-        }
-
-        body {
-            background: linear-gradient(135deg, var(--primary-color), var(--dark-color));
-            color: var(--light-color);
-            line-height: 1.6;
-            overflow-x: hidden;
-        }
-
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 2rem;
-        }
-
-        /* Navigation */
-        .nav-container {
-            position: fixed;
-            top: 0;
-            width: 100%;
-            background: rgba(44, 62, 80, 0.95);
-            z-index: 1000;
-            backdrop-filter: blur(10px);
-        }
-
-        .nav {
-            display: flex;
-            justify-content: space-between;
-            padding: 1rem 0;
-        }
-
-        .nav-links {
-            display: flex;
-            gap: 2rem;
-        }
-
-        .nav a {
-            color: var(--light-color);
-            text-decoration: none;
-            font-weight: 500;
-            transition: 0.3s;
-        }
-
-        .nav a:hover {
-            color: var(--primary-color);
-        }
-
-        /* Hero Section */
-        .hero {
-            height: 100vh;
-            display: flex;
-            align-items: center;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .hero-content {
-            position: relative;
-            z-index: 1;
-        }
-
-        .profile-img {
-            width: 300px;
-            height: 300px;
-            border-radius: 50%;
-            margin-bottom: 2rem;
-            border: 5px solid var(--primary-color);
-            animation: float 3s ease-in-out infinite;
-        }
-
-        @keyframes float {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-20px); }
-        }
-
-        .hero h1 {
-            font-size: 4rem;
-            margin-bottom: 1rem;
-        }
-
-        .hero p {
-            font-size: 1.5rem;
-            margin-bottom: 2rem;
-        }
-
-        /* Sections */
-        section {
-            padding: 5rem 0;
-        }
-
-        .section-title {
-            text-align: center;
-            font-size: 2.5rem;
-            margin-bottom: 3rem;
-            position: relative;
-        }
-
-        .section-title::after {
-            content: '';
-            position: absolute;
-            bottom: -10px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 50px;
-            height: 3px;
-            background: var(--primary-color);
-        }
-
-        /* Skills Grid */
-        .skills-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 2rem;
-        }
-
-        .skill-card {
-            background: rgba(255, 255, 255, 0.1);
-            padding: 2rem;
-            border-radius: 10px;
-            transition: 0.3s;
-        }
-
-        .skill-card:hover {
-            transform: translateY(-10px);
-            background: rgba(255, 255, 255, 0.2);
-        }
-
-        /* Contact Form */
-        .contact-form {
-            max-width: 600px;
-            margin: 0 auto;
-        }
-
-        .form-group {
-            margin-bottom: 1.5rem;
-        }
-
-        input, textarea {
-            width: 100%;
-            padding: 1rem;
-            background: rgba(255, 255, 255, 0.1);
-            border: none;
-            border-radius: 5px;
-            color: var(--light-color);
-            transition: 0.3s;
-        }
-
-        input:focus, textarea:focus {
-            outline: none;
-            background: rgba(255, 255, 255, 0.2);
-        }
-
-        .btn {
-            display: inline-block;
-            padding: 1rem 2rem;
-            background: var(--primary-color);
-            color: var(--light-color);
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: 0.3s;
-        }
-
-        .btn:hover {
-            background: var(--secondary-color);
-            transform: translateY(-3px);
-        }
-
-        /* Media Queries */
-        @media (max-width: 768px) {
-            .nav-links {
-                display: none;
+    <title>Andy Ooi Jiale - Professional Portfolio</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.8/dist/chart.umd.min.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Montserrat:wght@500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind Configuration -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#4F46E5', // Indigo
+                        secondary: '#10B981', // Emerald
+                        accent: '#8B5CF6', // Violet
+                        dark: '#111827',
+                        darker: '#030712',
+                        light: '#F9FAFB'
+                    },
+                    fontFamily: {
+                        inter: ['Inter', 'sans-serif'],
+                        montserrat: ['Montserrat', 'sans-serif']
+                    },
+                    animation: {
+                        'float': 'float 6s ease-in-out infinite',
+                        'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                        'fade-in': 'fadeIn 0.8s ease-in-out',
+                        'slide-up': 'slideUp 0.8s ease-out',
+                        'scale-in': 'scaleIn 0.5s ease-out',
+                        'ai-glow': 'aiGlow 3s ease-in-out infinite alternate'
+                    },
+                    keyframes: {
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-20px)' }
+                        },
+                        fadeIn: {
+                            '0%': { opacity: '0' },
+                            '100%': { opacity: '1' }
+                        },
+                        slideUp: {
+                            '0%': { transform: 'translateY(30px)', opacity: '0' },
+                            '100%': { transform: 'translateY(0)', opacity: '1' }
+                        },
+                        scaleIn: {
+                            '0%': { transform: 'scale(0.9)', opacity: '0' },
+                            '100%': { transform: 'scale(1)', opacity: '1' }
+                        },
+                        aiGlow: {
+                            '0%': { boxShadow: '0 0 15px rgba(79, 70, 229, 0.4), 0 0 30px rgba(139, 92, 246, 0.2)' },
+                            '100%': { boxShadow: '0 0 25px rgba(79, 70, 229, 0.6), 0 0 40px rgba(139, 92, 246, 0.4)' }
+                        }
+                    }
+                }
             }
-
-            .hero h1 {
-                font-size: 3rem;
+        }
+    </script>
+    
+    <style type="text/tailwindcss">
+        @layer utilities {
+            .content-auto {
+                content-visibility: auto;
             }
-
-            .skills-grid {
-                grid-template-columns: 1fr;
+            .text-shadow {
+                text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            }
+            .text-gradient {
+                background-clip: text;
+                -webkit-background-clip: text;
+                color: transparent;
+                background-image: linear-gradient(to right, #4F46E5, #8B5CF6);
+            }
+            .bg-glass {
+                background: rgba(17, 24, 39, 0.7);
+                backdrop-filter: blur(10px);
+            }
+            .bg-transparent {
+                background: transparent;
+            }
+            .card-hover {
+                transition: all 0.3s ease;
+            }
+            .card-hover:hover {
+                transform: translateY(-5px);
+                box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+            }
+            .skill-bar {
+                height: 6px;
+                background: #374151;
+                border-radius: 3px;
+                overflow: hidden;
+            }
+            .skill-progress {
+                height: 100%;
+                border-radius: 3px;
+                transition: width 1.5s ease-in-out;
+            }
+            .section-padding {
+                padding: clamp(3rem, 8vw, 8rem) 0;
+            }
+            .ai-mesh {
+                background-image: 
+                    radial-gradient(circle at 10% 20%, rgba(79, 70, 229, 0.1) 0%, transparent 20%),
+                    radial-gradient(circle at 90% 80%, rgba(139, 92, 246, 0.1) 0%, transparent 20%);
+            }
+            .ai-pattern {
+                background-image: 
+                    linear-gradient(135deg, rgba(79, 70, 229, 0.05) 25%, transparent 25%),
+                    linear-gradient(225deg, rgba(79, 70, 229, 0.05) 25%, transparent 25%),
+                    linear-gradient(45deg, rgba(139, 92, 246, 0.05) 25%, transparent 25%),
+                    linear-gradient(315deg, rgba(139, 92, 246, 0.05) 25%, transparent 25%);
+                background-size: 20px 20px;
+                background-position: 0 0, 10px 0, 10px -10px, 0px 10px;
             }
         }
     </style>
 </head>
-<body>
-    <nav class="nav-container">
-        <div class="container nav">
-            <h1>Your Logo</h1>
-            <div class="nav-links">
-                <a href="#home">Home</a>
-                <a href="#about">About</a>
-                <a href="#skills">Skills</a>
-                <a href="#contact">Contact</a>
+<body class="font-inter bg-darker text-light overflow-x-hidden">
+    <!-- Navigation -->
+    <nav id="navbar" class="fixed w-full z-50 transition-all duration-300 bg-glass">
+        <div class="container mx-auto px-4 py-4 flex justify-between items-center">
+            <a href="#" class="text-2xl font-montserrat font-bold text-gradient">Andy Ooi</a>
+            
+            <!-- Desktop Menu -->
+            <div class="hidden md:flex space-x-8">
+                <a href="#about" class="nav-link hover:text-secondary transition-colors">About</a>
+                <a href="#skills" class="nav-link hover:text-secondary transition-colors">Skills</a>
+                <a href="#experience" class="nav-link hover:text-secondary transition-colors">Experience</a>
+                <a href="#projects" class="nav-link hover:text-secondary transition-colors">Projects</a>
+                <a href="#contact" class="nav-link hover:text-secondary transition-colors">Contact</a>
+            </div>
+            
+            <!-- Mobile Menu Button -->
+            <button id="menu-toggle" class="md:hidden text-light focus:outline-none">
+                <i class="fa fa-bars text-2xl"></i>
+            </button>
+        </div>
+        
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="md:hidden hidden bg-glass border-t border-gray-800">
+            <div class="container mx-auto px-4 py-4 flex flex-col space-y-4">
+                <a href="#about" class="nav-link hover:text-secondary transition-colors py-2">About</a>
+                <a href="#skills" class="nav-link hover:text-secondary transition-colors py-2">Skills</a>
+                <a href="#experience" class="nav-link hover:text-secondary transition-colors py-2">Experience</a>
+                <a href="#projects" class="nav-link hover:text-secondary transition-colors py-2">Projects</a>
+                <a href="#contact" class="nav-link hover:text-secondary transition-colors py-2">Contact</a>
             </div>
         </div>
     </nav>
 
-    <section id="home" class="hero">
-        <div class="container hero-content">
-            <img src="your-profile-image.jpg" alt="Your Name" class="profile-img">
-            <h1>Hi, I'm Your Name</h1>
-            <p>Web Developer & UI/UX Designer</p>
-            <a href="#contact" class="btn">Get in Touch</a>
+    <!-- Hero Section -->
+    <section class="min-h-screen flex items-center relative overflow-hidden">
+        <div class="absolute inset-0 bg-darker z-0">
+            <div class="absolute top-0 left-0 w-full h-full bg-[url('https://picsum.photos/id/180/1920/1080')] bg-cover bg-center opacity-10"></div>
+            <div class="absolute inset-0 bg-gradient-to-b from-darker via-darker to-darker/90"></div>
+        </div>
+        
+        <div class="container mx-auto px-4 relative z-10">
+            <div class="flex flex-col md:flex-row items-center">
+                <div class="md:w-1/2 mb-10 md:mb-0">
+                    <h1 class="text-[clamp(2.5rem,8vw,5rem)] font-montserrat font-bold leading-tight mb-4">
+                        Hi, I'm <span class="text-gradient">Andy Ooi</span>
+                    </h1>
+                    <h2 class="text-[clamp(1.5rem,5vw,3rem)] font-montserrat font-semibold mb-6">
+                        Aspiring <span class="text-secondary">Computer Engineer</span>
+                    </h2>
+                    <p class="text-lg text-gray-300 mb-8 max-w-lg">
+                        Currently pursuing a degree in Computer Engineering at UniMAP, with a passion for embedded systems, IoT, and programming. Eager to apply my skills in an innovative internship environment.
+                    </p>
+                    <div class="flex flex-wrap gap-4">
+                        <a href="#contact" class="px-8 py-3 bg-primary hover:bg-primary/90 text-white font-medium rounded-full transition-all shadow-lg shadow-primary/20 hover:shadow-primary/30 hover:-translate-y-1">
+                            Get in Touch
+                        </a>
+                        <a href="#projects" class="px-8 py-3 bg-transparent border-2 border-secondary text-secondary hover:bg-secondary/10 font-medium rounded-full transition-all hover:-translate-y-1">
+                            View Projects
+                        </a>
+                    </div>
+                    
+                    <div class="mt-12 flex space-x-6">
+                        <a href="https://linkedin.com/in/andy-ooi-625706289" target="_blank" class="w-12 h-12 rounded-full bg-gray-800 flex items-center justify-center hover:bg-primary transition-colors">
+                            <i class="fa fa-linkedin text-xl"></i>
+                        </a>
+                        <a href="mailto:andyooi2002@gmail.com" class="w-12 h-12 rounded-full bg-gray-800 flex items-center justify-center hover:bg-primary transition-colors">
+                            <i class="fa fa-envelope text-xl"></i>
+                        </a>
+                        <a href="tel:0184734745" class="w-12 h-12 rounded-full bg-gray-800 flex items-center justify-center hover:bg-primary transition-colors">
+                            <i class="fa fa-phone text-xl"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="md:w-1/2 relative">
+                    <div class="w-64 h-64 md:w-80 md:h-80 mx-auto relative z-10 animate-float">
+                        <div class="absolute inset-0 rounded-full bg-gradient-to-r from-primary to-accent opacity-30 blur-3xl animate-pulse-slow"></div>
+                        <div class="absolute inset-0 rounded-full bg-primary/10 border-2 border-primary/20 animate-pulse-slow"></div>
+                        
+                        <!-- AI Animation Element -->
+                        <div class="w-full h-full rounded-full overflow-hidden ai-mesh ai-pattern animate-ai-glow">
+                            <div class="w-full h-full flex items-center justify-center p-8">
+                                <svg viewBox="0 0 200 200" class="w-full h-full">
+                                    <circle cx="100" cy="100" r="80" fill="none" stroke="rgba(79, 70, 229, 0.3)" stroke-width="2" />
+                                    <circle cx="100" cy="100" r="60" fill="none" stroke="rgba(139, 92, 246, 0.2)" stroke-width="2" />
+                                    <circle cx="100" cy="100" r="40" fill="none" stroke="rgba(16, 185, 129, 0.1)" stroke-width="2" />
+                                    
+                                    <!-- Animated AI Lines -->
+                                    <g id="ai-lines">
+                                        <path d="M100,30 L120,60 L140,40 L160,70 L130,100" stroke="rgba(79, 70, 229, 0.5)" stroke-width="1.5" fill="none">
+                                            <animate attributeName="stroke-opacity" values="0.3;0.8;0.3" dur="4s" repeatCount="indefinite" />
+                                        </path>
+                                        <path d="M40,100 L70,120 L50,140 L80,160 L100,130" stroke="rgba(139, 92, 246, 0.5)" stroke-width="1.5" fill="none">
+                                            <animate attributeName="stroke-opacity" values="0.3;0.8;0.3" dur="5s" repeatCount="indefinite" />
+                                        </path>
+                                        <path d="M100,170 L80,140 L60,160 L40,130 L70,100" stroke="rgba(16, 185, 129, 0.5)" stroke-width="1.5" fill="none">
+                                            <animate attributeName="stroke-opacity" values="0.3;0.8;0.3" dur="6s" repeatCount="indefinite" />
+                                        </path>
+                                        <path d="M160,100 L130,80 L150,60 L120,40 L100,70" stroke="rgba(79, 70, 229, 0.5)" stroke-width="1.5" fill="none">
+                                            <animate attributeName="stroke-opacity" values="0.3;0.8;0.3" dur="3s" repeatCount="indefinite" />
+                                        </path>
+                                    </g>
+                                    
+                                    <!-- Central AI Node -->
+                                    <circle cx="100" cy="100" r="10" fill="rgba(79, 70, 229, 0.8)">
+                                        <animate attributeName="r" values="10;12;10" dur="3s" repeatCount="indefinite" />
+                                    </circle>
+                                    
+                                    <!-- Orbiting Dots -->
+                                    <g id="orbit-1">
+                                        <circle cx="140" cy="100" r="5" fill="rgba(139, 92, 246, 0.8)">
+                                            <animateMotion dur="12s" repeatCount="indefinite">
+                                                <path d="M100,30 A70,70 0 1,1 100,30" fill="none" />
+                                            </animateMotion>
+                                        </circle>
+                                    </g>
+                                    <g id="orbit-2">
+                                        <circle cx="100" cy="140" r="5" fill="rgba(16, 185, 129, 0.8)">
+                                            <animateMotion dur="16s" repeatCount="indefinite">
+                                                <path d="M100,30 A80,80 0 0,1 100,30" fill="none" />
+                                            </animateMotion>
+                                        </circle>
+                                    </g>
+                                    <g id="orbit-3">
+                                        <circle cx="60" cy="100" r="5" fill="rgba(79, 70, 229, 0.8)">
+                                            <animateMotion dur="14s" repeatCount="indefinite">
+                                                <path d="M100,30 A90,90 0 1,0 100,30" fill="none" />
+                                            </animateMotion>
+                                        </circle>
+                                    </g>
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="absolute -bottom-6 -right-6 w-40 h-40 bg-secondary/20 rounded-full blur-3xl animate-pulse-slow"></div>
+                    <div class="absolute -top-6 -left-6 w-32 h-32 bg-accent/20 rounded-full blur-3xl animate-pulse-slow" style="animation-delay: 1s;"></div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="absolute bottom-10 left-1/2 transform -translate-x-1/2 animate-bounce">
+            <a href="#about" class="text-light/70 hover:text-secondary transition-colors">
+                <i class="fa fa-chevron-down text-2xl"></i>
+            </a>
         </div>
     </section>
 
-    <section id="about" class="section">
-        <div class="container">
-            <h2 class="section-title">About Me</h2>
-            <p>Add your about me content here...</p>
-        </div>
-    </section>
-
-    <section id="skills" class="section">
-        <div class="container">
-            <h2 class="section-title">Skills</h2>
-            <div class="skills-grid">
-                <div class="skill-card">
-                    <h3>Web Development</h3>
-                    <p>HTML, CSS, JavaScript</p>
+    <!-- About Section -->
+    <section id="about" class="section-padding bg-darker relative">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-[clamp(1.8rem,5vw,3rem)] font-montserrat font-bold mb-4">About <span class="text-gradient">Me</span></h2>
+                <div class="w-20 h-1 bg-secondary mx-auto"></div>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+                <div class="order-2 md:order-1">
+                    <h3 class="text-2xl font-montserrat font-semibold mb-6 text-light">
+                        A Passionate <span class="text-secondary">Computer Engineering</span> Student
+                    </h3>
+                    <p class="text-gray-300 mb-6 leading-relaxed">
+                        I'm currently pursuing a Bachelor of Computer Engineering with Honours at Universiti Malaysia Perlis (UniMAP), where I've maintained a CGPA of 3.62. My academic journey has been focused on developing expertise in embedded systems, IoT, and programming languages such as Verilog and C/C++.
+                    </p>
+                    <p class="text-gray-300 mb-8 leading-relaxed">
+                        Driven by curiosity and a passion for innovation, I'm eager to bring my problem-solving skills and energy to an exciting internship opportunity. My industrial training is scheduled from 29 July to 06 October 2025, and I'm actively seeking opportunities to apply my knowledge in real-world scenarios.
+                    </p>
+                    
+                    <div class="grid grid-cols-2 gap-6 mb-8">
+                        <div class="bg-gray-900/50 p-6 rounded-xl card-hover">
+                            <div class="text-3xl text-primary mb-3"><i class="fa fa-graduation-cap"></i></div>
+                            <h4 class="text-xl font-semibold mb-2">Education</h4>
+                            <p class="text-gray-400">UniMAP - Computer Engineering</p>
+                        </div>
+                        <div class="bg-gray-900/50 p-6 rounded-xl card-hover">
+                            <div class="text-3xl text-secondary mb-3"><i class="fa fa-briefcase"></i></div>
+                            <h4 class="text-xl font-semibold mb-2">Experience</h4>
+                            <p class="text-gray-400">IT Software Engineer Intern</p>
+                        </div>
+                        <div class="bg-gray-900/50 p-6 rounded-xl card-hover">
+                            <div class="text-3xl text-accent mb-3"><i class="fa fa-code"></i></div>
+                            <h4 class="text-xl font-semibold mb-2">Projects</h4>
+                            <p class="text-gray-400">2+ Completed Projects</p>
+                        </div>
+                        <div class="bg-gray-900/50 p-6 rounded-xl card-hover">
+                            <div class="text-3xl text-primary mb-3"><i class="fa fa-trophy"></i></div>
+                            <h4 class="text-xl font-semibold mb-2">Achievements</h4>
+                            <p class="text-gray-400">3x Dean's List</p>
+                        </div>
+                    </div>
+                    
+                    <a href="#contact" class="inline-flex items-center text-secondary hover:text-white transition-colors">
+                        Let's Connect <i class="fa fa-long-arrow-right ml-2"></i>
+                    </a>
                 </div>
-                <div class="skill-card">
-                    <h3>UI/UX Design</h3>
-                    <p>Figma, Adobe XD</p>
+                
+                <div class="order-1 md:order-2 relative">
+                    <div class="relative z-10 rounded-2xl overflow-hidden shadow-2xl">
+                        <!-- AI Animated Pattern Background -->
+                        <div class="w-full h-full bg-darker ai-mesh ai-pattern p-8">
+                            <svg viewBox="0 0 400 500" class="w-full h-full">
+                                <!-- Background grid -->
+                                <g opacity="0.1">
+                                    <path d="M0,100 L400,100 M0,200 L400,200 M0,300 L400,300 M0,400 L400,400" stroke="#4F46E5" stroke-width="1" />
+                                    <path d="M100,0 L100,500 M200,0 L200,500 M300,0 L300,500" stroke="#4F46E5" stroke-width="1" />
+                                </g>
+                                
+                                <!-- Animated neural network lines -->
+                                <g id="neural-network">
+                                    <circle cx="100" cy="100" r="5" fill="#4F46E5">
+                                        <animate attributeName="r" values="5;7;5" dur="3s" repeatCount="indefinite" />
+                                    </circle>
+                                    <circle cx="200" cy="150" r="5" fill="#8B5CF6">
+                                        <animate attributeName="r" values="5;7;5" dur="4s" repeatCount="indefinite" />
+                                    </circle>
+                                    <circle cx="300" cy="100" r="5" fill="#10B981">
+                                        <animate attributeName="r" values="5;7;5" dur="3.5s" repeatCount="indefinite" />
+                                    </circle>
+                                    <circle cx="100" cy="300" r="5" fill="#8B5CF6">
+                                        <animate attributeName="r" values="5;7;5" dur="4.5s" repeatCount="indefinite" />
+                                    </circle>
+                                    <circle cx="200" cy="350" r="5" fill="#4F46E5">
+                                        <animate attributeName="r" values="5;7;5" dur="3.2s" repeatCount="indefinite" />
+                                    </circle>
+                                    <circle cx="300" cy="300" r="5" fill="#10B981">
+                                        <animate attributeName="r" values="5;7;5" dur="4.8s" repeatCount="indefinite" />
+                                    </circle>
+                                    
+                                    <path d="M100,100 Q150,125 200,150" stroke="#4F46E5" stroke-width="1" fill="none">
+                                        <animate attributeName="stroke-opacity" values="0.3;0.8;0.3" dur="4s" repeatCount="indefinite" />
+                                    </path>
+                                    <path d="M200,150 Q250,125 300,100" stroke="#8B5CF6" stroke-width="1" fill="none">
+                                        <animate attributeName="stroke-opacity" values="0.3;0.8;0.3" dur="5s" repeatCount="indefinite" />
+                                    </path>
+                                    <path d="M100,100 Q150,200 100,300" stroke="#10B981" stroke-width="1" fill="none">
+                                        <animate attributeName="stroke-opacity" values="0.3;0.8;0.3" dur="4.5s" repeatCount="indefinite" />
+                                    </path>
+                                    <path d="M100,300 Q150,325 200,350" stroke="#4F46E5" stroke-width="1" fill="none">
+                                        <animate attributeName="stroke-opacity" values="0.3;0.8;0.3" dur="3.8s" repeatCount="indefinite" />
+                                    </path>
+                                    <path d="M200,350 Q250,325 300,300" stroke="#8B5CF6" stroke-width="1" fill="none">
+                                        <animate attributeName="stroke-opacity" values="0.3;0.8;0.3" dur="4.2s" repeatCount="indefinite" />
+                                    </path>
+                                    <path d="M300,100 Q300,200 300,300" stroke="#10B981" stroke-width="1" fill="none">
+                                        <animate attributeName="stroke-opacity" values="0.3;0.8;0.3" dur="3.5s" repeatCount="indefinite" />
+                                    </path>
+                                </g>
+                                
+                                <!-- Floating code symbols -->
+                                <g id="code-symbols" font-family="monospace" font-size="12" fill="#4F46E5" opacity="0.7">
+                                    <text x="50" y="150" opacity="0.8">
+                                        <animate attributeName="opacity" values="0.3;0.8;0.3" dur="6s" repeatCount="indefinite" />
+                                        if (AI == true) {
+                                    </text>
+                                    <text x="70" y="170" opacity="0.8">
+                                        <animate attributeName="opacity" values="0.3;0.8;0.3" dur="7s" repeatCount="indefinite" />
+                                        develop();
+                                    </text>
+                                    <text x="50" y="190" opacity="0.8">
+                                        <animate attributeName="opacity" values="0.3;0.8;0.3" dur="8s" repeatCount="indefinite" />
+                                    }
+                                    </text>
+                                    
+                                    <text x="250" y="250" fill="#8B5CF6" opacity="0.8">
+                                        <animate attributeName="opacity" values="0.3;0.8;0.3" dur="5s" repeatCount="indefinite" />
+                                        for (int i=0; i<100; i++) {
+                                    </text>
+                                    <text x="270" y="270" fill="#8B5CF6" opacity="0.8">
+                                        <animate attributeName="opacity" values="0.3;0.8;0.3" dur="6s" repeatCount="indefinite" />
+                                        learn(i);
+                                    </text>
+                                    <text x="250" y="290" fill="#8B5CF6" opacity="0.8">
+                                        <animate attributeName="opacity" values="0.3;0.8;0.3" dur="7s" repeatCount="indefinite" />
+                                    }
+                                    </text>
+                                    
+                                    <text x="150" y="400" fill="#10B981" opacity="0.8">
+                                        <animate attributeName="opacity" values="0.3;0.8;0.3" dur="7s" repeatCount="indefinite" />
+                                        while (innovation) {
+                                    </text>
+                                    <text x="170" y="420" fill="#10B981" opacity="0.8">
+                                        <animate attributeName="opacity" values="0.3;0.8;0.3" dur="8s" repeatCount="indefinite" />
+                                        create();
+                                    </text>
+                                    <text x="150" y="440" fill="#10B981" opacity="0.8">
+                                        <animate attributeName="opacity" values="0.3;0.8;0.3" dur="9s" repeatCount="indefinite" />
+                                    }
+                                    </text>
+                                </g>
+                            </svg>
+                        </div>
+                    </div>
+                    <div class="absolute -top-4 -right-4 w-32 h-32 bg-primary/20 rounded-lg blur-2xl"></div>
+                    <div class="absolute -bottom-4 -left-4 w-40 h-40 bg-secondary/20 rounded-lg blur-2xl"></div>
                 </div>
-                <!-- Add more skill cards -->
+            </div>
+            
+            <div class="mt-20 bg-gray-900/50 rounded-2xl p-8 md:p-12">
+                <h3 class="text-2xl font-montserrat font-semibold mb-8 text-center">Personal Details</h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <div class="flex items-start">
+                        <div class="bg-primary/10 p-3 rounded-full mr-4">
+                            <i class="fa fa-envelope text-primary text-xl"></i>
+                        </div>
+                        <div>
+                            <h4 class="text-lg font-semibold mb-1">Email</h4>
+                            <p class="text-gray-400">andyooi2002@gmail.com</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start">
+                        <div class="bg-primary/10 p-3 rounded-full mr-4">
+                            <i class="fa fa-phone text-primary text-xl"></i>
+                        </div>
+                        <div>
+                            <h4 class="text-lg font-semibold mb-1">Phone</h4>
+                            <p class="text-gray-400">018-473 4745</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start">
+                        <div class="bg-primary/10 p-3 rounded-full mr-4">
+                            <i class="fa fa-map-marker text-primary text-xl"></i>
+                        </div>
+                        <div>
+                            <h4 class="text-lg font-semibold mb-1">Address</h4>
+                            <p class="text-gray-400">No 10-1-10, Taman Bukit Jaya, 02000, Sungai Petani, Kedah</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start">
+                        <div class="bg-primary/10 p-3 rounded-full mr-4">
+                            <i class="fa fa-calendar text-primary text-xl"></i>
+                        </div>
+                        <div>
+                            <h4 class="text-lg font-semibold mb-1">Birthday</h4>
+                            <p class="text-gray-400">July 16, 2002</p>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
 
-    <section id="contact" class="section">
-        <div class="container">
-            <h2 class="section-title">Contact Me</h2>
-            <form class="contact-form">
-                <div class="form-group">
-                    <input type="text" placeholder="Your Name" required>
+    <!-- Skills Section -->
+    <section id="skills" class="section-padding bg-dark relative">
+        <div class="absolute inset-0 overflow-hidden">
+            <div class="absolute top-0 left-0 w-full h-full bg-[url('https://picsum.photos/id/1/1920/1080')] bg-cover bg-center opacity-5"></div>
+        </div>
+        
+        <div class="container mx-auto px-4 relative z-10">
+            <div class="text-center mb-16">
+                <h2 class="text-[clamp(1.8rem,5vw,3rem)] font-montserrat font-bold mb-4">My <span class="text-gradient">Skills</span></h2>
+                <div class="w-20 h-1 bg-secondary mx-auto"></div>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
+                <div>
+                    <h3 class="text-xl font-montserrat font-semibold mb-8">Technical Skills</h3>
+                    
+                    <div class="space-y-8">
+                        <div>
+                            <div class="flex justify-between mb-2">
+                                <span class="font-medium">Verilog & FPGA Design</span>
+                                <span>85%</span>
+                            </div>
+                            <div class="skill-bar">
+                                <div class="skill-progress bg-primary" style="width: 0%" data-width="85%"></div>
+                            </div>
+                        </div>
+                        
+                        <div>
+                            <div class="flex justify-between mb-2">
+                                <span class="font-medium">C & C++ Programming</span>
+                                <span>80%</span>
+                            </div>
+                            <div class="skill-bar">
+                                <div class="skill-progress bg-primary" style="width: 0%" data-width="80%"></div>
+                            </div>
+                        </div>
+                        
+                        <div>
+                            <div class="flex justify-between mb-2">
+                                <span class="font-medium">Embedded Systems Development</span>
+                                <span>75%</span>
+                            </div>
+                            <div class="skill-bar">
+                                <div class="skill-progress bg-primary" style="width: 0%" data-width="75%"></div>
+                            </div>
+                        </div>
+                        
+                        <div>
+                            <div class="flex justify-between mb-2">
+                                <span class="font-medium">Python Programming</span>
+                                <span>70%</span>
+                            </div>
+                            <div class="skill-bar">
+                                <div class="skill-progress bg-primary" style="width: 0%" data-width="70%"></div>
+                            </div>
+                        </div>
+                        
+                        <div>
+                            <div class="flex justify-between mb-2">
+                                <span class="font-medium">IoT Development</span>
+                                <span>75%</span>
+                            </div>
+                            <div class="skill-bar">
+                                <div class="skill-progress bg-primary" style="width: 0%" data-width="75%"></div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <div class="form-group">
-                    <input type="email" placeholder="Your Email" required>
+                
+                <div>
+                    <h3 class="text-xl font-montserrat font-semibold mb-8">Professional Skills</h3>
+                    
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                        <div class="bg-gray-900/50 p-6 rounded-xl card-hover">
+                            <div class="text-3xl text-secondary mb-4"><i class="fa fa-lightbulb-o"></i></div>
+                            <h4 class="text-xl font-semibold mb-3">Problem Solving</h4>
+                            <p class="text-gray-400">Strong analytical skills with a systematic approach to solving complex problems.</p>
+                        </div>
+                        
+                        <div class="bg-gray-900/50 p-6 rounded-xl card-hover">
+                            <div class="text-3xl text-secondary mb-4"><i class="fa fa-users"></i></div>
+                            <h4 class="text-xl font-semibold mb-3">Teamwork</h4>
+                            <p class="text-gray-400">Collaborative team player with experience working in diverse groups.</p>
+                        </div>
+                        
+                        <div class="bg-gray-900/50 p-6 rounded-xl card-hover">
+                            <div class="text-3xl text-secondary mb-4"><i class="fa fa-clock-o"></i></div>
+                            <h4 class="text-xl font-semibold mb-3">Time Management</h4>
+                            <p class="text-gray-400">Efficiently manage multiple tasks and meet deadlines in fast-paced environments.</p>
+                        </div>
+                        
+                        <div class="bg-gray-900/50 p-6 rounded-xl card-hover">
+                            <div class="text-3xl text-secondary mb-4"><i class="fa fa-book"></i></div>
+                            <h4 class="text-xl font-semibold mb-3">Fast Learner</h4>
+                            <p class="text-gray-400">Quickly grasp new concepts and technologies with enthusiasm for continuous learning.</p>
+                        </div>
+                    </div>
                 </div>
-                <div class="form-group">
-                    <textarea rows="5" placeholder="Your Message" required></textarea>
+            </div>
+            
+            <div class="mt-20">
+                <h3 class="text-xl font-montserrat font-semibold mb-8 text-center">Skill Proficiency</h3>
+                <div class="bg-gray-900/50 p-8 rounded-2xl">
+                    <canvas id="skillsChart" height="300"></canvas>
                 </div>
-                <button type="submit" class="btn">Send Message</button>
-            </form>
+            </div>
         </div>
     </section>
 
-    <script>
-        // Smooth scrolling for navigation links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                document.querySelector(this.getAttribute('href')).scrollIntoView({
-                    behavior: 'smooth'
-                });
-            });
-        });
-
-        // Reveal animations on scroll
-        window.addEventListener('scroll', reveal);
-
-        function reveal() {
-            const reveals = document.querySelectorAll('.section');
+    <!-- Experience Section -->
+    <section id="experience" class="section-padding bg-darker relative">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-[clamp(1.8rem,5vw,3rem)] font-montserrat font-bold mb-4">My <span class="text-gradient">Journey</span></h2>
+                <div class="w-20 h-1 bg-secondary mx-auto"></div>
+            </div>
             
-            reveals.forEach(section => {
-                const windowHeight = window.innerHeight;
-                const revealTop = section.getBoundingClientRect().top;
-                const revealPoint = 150;
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
+                <div>
+                    <h3 class="text-xl font-montserrat font-semibold mb-8">Education</h3>
+                    
+                    <div class="space-y-8">
+                        <div class="bg-gray-900/50 p-6 rounded-xl card-hover relative">
+                            <div class="absolute -left-3 top-6 w-6 h-6 rounded-full bg-primary border-4 border-darker"></div>
+                            <div class="ml-4">
+                                <span class="inline-block px-3 py-1 bg-primary/10 text-primary text-sm font-medium rounded-full mb-3">2020 - Present</span>
+                                <h4 class="text-xl font-semibold mb-1">Universiti Malaysia Perlis (UniMAP)</h4>
+                                <p class="text-secondary mb-3">Bachelor of Computer Engineering with Honours</p>
+                                <p class="text-gray-400">CGPA: 3.62 / 4.00</p>
+                                <p class="text-gray-400 mt-2">Relevant Courses: Digital Electronics, Microprocessor & Microcontroller, Embedded Systems, VLSI Design, Computer Architecture, IoT Technology</p>
+                            </div>
+                        </div>
+                        
+                        <div class="bg-gray-900/50 p-6 rounded-xl card-hover relative">
+                            <div class="absolute -left-3 top-6 w-6 h-6 rounded-full bg-primary border-4 border-darker"></div>
+                            <div class="ml-4">
+                                <span class="inline-block px-3 py-1 bg-primary/10 text-primary text-sm font-medium rounded-full mb-3">2016 - 2019</span>
+                                <h4 class="text-xl font-semibold mb-1">SMK Tunku Putra, Alor Setar, Kedah</h4>
+                                <p class="text-secondary mb-3">Sijil Pelajaran Malaysia (SPM)</p>
+                                <p class="text-gray-400">GPA: 3.92 / 4.00</p>
+                                <p class="text-gray-400 mt-2">Relevant Subjects: Physics, Chemistry, Biology, Additional Mathematics, Mathematics, English, Bahasa Melayu</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div>
+                    <h3 class="text-xl font-montserrat font-semibold mb-8">Experience</h3>
+                    
+                    <div class="space-y-8">
+                        <div class="bg-gray-900/50 p-6 rounded-xl card-hover relative">
+                            <div class="absolute -left-3 top-6 w-6 h-6 rounded-full bg-secondary border-4 border-darker"></div>
+                            <div class="ml-4">
+                                <span class="inline-block px-3 py-1 bg-secondary/10 text-secondary text-sm font-medium rounded-full mb-3">June 2024 - Aug 2024</span>
+                                <h4 class="text-xl font-semibold mb-1">IT Software Engineer Intern</h4>
+                                <p class="text-secondary mb-3">MRV Technology Sdn Bhd</p>
+                                <ul class="text-gray-400 space-y-2">
+                                    <li>• Assisted in developing and maintaining software applications using C# and .NET framework</li>
+                                    <li>• Worked on SQL database design and implementation</li>
+                                    <li>• Participated in Agile development processes and team meetings</li>
+                                    <li>• Contributed to the development of a desktop application for inventory management</li>
+                                </ul>
+                            </div>
+                        </div>
+                        
+                        <div class="bg-gray-900/50 p-6 rounded-xl card-hover relative">
+                            <div class="absolute -left-3 top-6 w-6 h-6 rounded-full bg-secondary border-4 border-darker"></div>
+                            <div class="ml-4">
+                                <span class="inline-block px-3 py-1 bg-secondary/10 text-secondary text-sm font-medium rounded-full mb-3">Jan 2023 - Dec 2023</span>
+                                <h4 class="text-xl font-semibold mb-1">Student Assistant</h4>
+                                <p class="text-secondary mb-3">Faculty of Electrical & Electronic Engineering, UniMAP</p>
+                                <ul class="text-gray-400 space-y-2">
+                                    <li>• Assisted professors in preparing laboratory materials and demonstrations</li>
+                                    <li>• Conducted tutorial sessions for undergraduate students in digital electronics</li>
+                                    <li>• Developed educational content for online learning platforms</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
-                if (revealTop < windowHeight - revealPoint) {
-                    section.style.opacity = '1';
-                    section.style.transform = 'translateY(0)';
-                }
-            });
-        }
+    <!-- Projects Section -->
+    <section id="projects" class="section-padding bg-dark relative">
+        <div class="absolute inset-0 overflow-hidden">
+            <div class="absolute top-0 left-0 w-full h-full bg-[url('https://picsum.photos/id/160/1920/1080')] bg-cover bg-center opacity-5"></div>
+        </div>
+        
+        <div class="container mx-auto px-4 relative z-10">
+            <div class="text-center mb-16">
+                <h2 class="text-[clamp(1.8rem,5vw,3rem)] font-montserrat font-bold mb-4">My <span class="text-gradient">Projects</span></h2>
+                <div class="w-20 h-1 bg-secondary mx-auto"></div>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="bg-gray-900/50 rounded-xl overflow-hidden card-hover">
+                    <div class="relative">
+                        <div class="w-full h-64 bg-darker ai-mesh ai-pattern flex items-center justify-center">
+                            <!-- AI Animation for Project -->
+                            <svg viewBox="0 0 300 200" class="w-full h-full">
+                                <circle cx="150" cy="100" r="80" fill="none" stroke="rgba(79, 70, 229, 0.2)" stroke-width="2" />
+                                <path d="M70,100 Q150,50 230,100" stroke="rgba(79, 70, 229, 0.4)" stroke-width="2" fill="none">
+                                    <animate attributeName="stroke-opacity" values="0.2;0.6;0.2" dur="3s" repeatCount="indefinite" />
+                                </path>
+                                <path d="M70,150 Q150,100 230,150" stroke="rgba(139, 92, 246, 0.4)" stroke-width="2" fill="none">
+                                    <animate attributeName="stroke-opacity" values="0.2;0.6;0.2" dur="4s" repeatCount="indefinite" />
+                                </path>
+                                <path d="M70,50 Q150,150 230,50" stroke="rgba(16, 185, 129, 0.4)" stroke-width="2" fill="none">
+                                    <animate attributeName="stroke-opacity" values="0.2;0.6;0.2" dur="5s" repeatCount="indefinite" />
+                                </path>
+                                <circle cx="70" cy="100" r="8" fill="rgba(79, 70, 229, 0.8)">
+                                    <animate attributeName="r" values="8;10;8" dur="3s" repeatCount="indefinite" />
+                                </circle>
+                                <circle cx="150" cy="100" r="10" fill="rgba(139, 92, 246, 0.8)">
+                                    <animate attributeName="r" values="10;12;10" dur="4s" repeatCount="indefinite" />
+                                </circle>
+                                <circle cx="230" cy="100" r="8" fill="rgba(79, 70, 229, 0.8)">
+                                    <animate attributeName="r" values="8;10;8" dur="3s" repeatCount="indefinite" />
+                                </circle>
+                                <circle cx="70" cy="150" r="8" fill="rgba(139, 92, 246, 0.8)">
+                                    <animate attributeName="r" values="8;10;8" dur="4s" repeatCount="indefinite" />
+                                </circle>
+                                <circle cx="230" cy="150" r="8" fill="rgba(139, 92, 246, 0.8)">
+                                    <animate attributeName="r" values="8;10;8" dur="4s" repeatCount="indefinite" />
+                                </circle>
+                                <circle cx="70" cy="50" r="8" fill="rgba(16, 185, 129, 0.8)">
+                                    <animate attributeName="r" values="8;10;8" dur="5s" repeatCount="indefinite" />
+                                </circle>
+                                <circle cx="230" cy="50" r="8" fill="rgba(16, 185, 129, 0.8)">
+                                    <animate attributeName="r" values="8;10;8" dur="5s" repeatCount="indefinite" />
+                                </circle>
+                            </svg>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <span class="inline-block px-3 py-1 bg-primary/10 text-primary text-sm font-medium rounded-full mb-3">Verilog, FPGA</span>
+                        <h3 class="text-xl font-semibold mb-2">Smart Home Control System</h3>
+                        <p class="text-gray-400 mb-4">Designed an FPGA-based smart home control system using Verilog that can manage multiple home appliances through voice commands and mobile applications.</p>
+                        <div class="flex justify-between items-center">
+                            <a href="#" class="text-secondary hover:text-white transition-colors">View Details</a>
+                            <div class="flex space-x-2">
+                                <span class="text-xs px-2 py-1 bg-gray-800 rounded-full">Verilog</span>
+                                <span class="text-xs px-2 py-1 bg-gray-800 rounded-full">FPGA</span>
+                                <span class="text-xs px-2 py-1 bg-gray-800 rounded-full">IoT</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="bg-gray-900/50 rounded-xl overflow-hidden card-hover">
+                    <div class="relative">
+                        <div class="w-full h-64 bg-darker ai-mesh ai-pattern flex items-center justify-center">
+                            <!-- AI Animation for Project -->
+                            <svg viewBox="0 0 300 200" class="w-full h-full">
+                                <rect x="50" y="50" width="200" height="100" fill="none" stroke="rgba(139, 92, 246, 0.2)" stroke-width="2" rx="10" />
+                                <line x1="100" y1="50" x2="100" y2="200" stroke="rgba(139, 92, 246, 0.2)" stroke-width="1" />
+                                <line x1="200" y1="50" x2="200" y2="200" stroke="rgba(139, 92, 246, 0.2)" stroke-width="1" />
+                                <line x1="50" y1="100" x2="250" y2="100" stroke="rgba(139, 92, 246, 0.2)" stroke-width="1" />
+                                <line x1="50" y1="150" x2="250" y2="150" stroke="rgba(139, 92, 246, 0.2)" stroke-width="1" />
+                                
+                                <circle cx="100" cy="100" r="5" fill="rgba(79, 70, 229, 0.8)">
+                                    <animate attributeName="cx" values="100;150;100" dur="4s" repeatCount="indefinite" />
+                                </circle>
+                                <circle cx="200" cy="150" r="5" fill="rgba(16, 185, 129, 0.8)">
+                                    <animate attributeName="cy" values="150;100;150" dur="5s" repeatCount="indefinite" />
+                                </circle>
+                                <circle cx="150" cy="50" r="5" fill="rgba(139, 92, 246, 0.8)">
+                                    <animate attributeName="cx" values="150;200;150" dur="6s" repeatCount="indefinite" />
+                                </circle>
+                            </svg>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <span class="inline-block px-3 py-1 bg-secondary/10 text-secondary text-sm font-medium rounded-full mb-3">C++, Arduino</span>
+                        <h3 class="text-xl font-semibold mb-2">Environmental Monitoring System</h3>
+                        <p class="text-gray-400 mb-4">Developed an Arduino-based environmental monitoring system that collects data on temperature, humidity, and air quality, and sends alerts via IoT.</p>
+                        <div class="flex justify-between items-center">
+                            <a href="#" class="text-secondary hover:text-white transition-colors">View Details</a>
+                            <div class="flex space-x-2">
+                                <span class="text-xs px-2 py-1 bg-gray-800 rounded-full">C++</span>
+                                <span class="text-xs px-2 py-1 bg-gray-800 rounded-full">Arduino</span>
+                                <span class="text-xs px-2 py-1 bg-gray-800 rounded-full">Sensors</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="bg-gray-900/50 rounded-xl overflow-hidden card-hover">
+                    <div class="relative">
+                        <div class="w-full h-64 bg-darker ai-mesh ai-pattern flex items-center justify-center">
+                            <!-- AI Animation for Project -->
+                            <svg viewBox="0 0 300 200" class="w-full h-full">
+                                <path d="M50,100 Q100,50 150,100 Q200,150 250,100" fill="none" stroke="rgba(16, 185, 129, 0.2)" stroke-width="2" />
+                                <path d="M50,150 Q100,100 150,150 Q200,200 250,150" fill="none" stroke="rgba(79, 70, 229, 0.2)" stroke-width="2" />
+                                <path d="M50,50 Q100,150 150,50 Q200,100 250,50" fill="none" stroke="rgba(139, 92, 246, 0.2)" stroke-width="2" />
+                                
+                                <circle cx="50" cy="100" r="8" fill="rgba(16, 185, 129, 0.8)">
+                                    <animate attributeName="r" values="8;10;8" dur="3s" repeatCount="indefinite" />
+                                </circle>
+                                <circle cx="150" cy="100" r="10" fill="rgba(16, 185, 129, 0.8)">
+                                    <animate attributeName="r" values="10;12;10" dur="4s" repeatCount="indefinite" />
+                                </circle>
+                                <circle cx="250" cy="100" r="8" fill="rgba(16, 185, 129, 0.8)">
+                                    <animate attributeName="r" values="8;10;8" dur="3s" repeatCount="indefinite" />
+                                </circle>
+                                
+                                <circle cx="50" cy="150" r="8" fill="rgba(79, 70, 229, 0.8)">
+                                    <animate attributeName="r" values="8;10;8" dur="4s" repeatCount="indefinite" />
+                                </circle>
+                                <circle cx="150" cy="150" r="10" fill="rgba(79, 70, 229, 0.8)">
+                                    <animate attributeName="r" values="10;12;10" dur="5s" repeatCount="indefinite" />
+                                </circle>
+                                <circle cx="250" cy="150" r="8" fill="rgba(79, 70, 229, 0.8)">
+                                    <animate attributeName="r" values="8;10;8" dur="4s" repeatCount="indefinite" />
+                                </circle>
+                                
+                                <circle cx="50" cy="50" r="8" fill="rgba(139, 92, 246, 0.8)">
+                                    <animate attributeName="r" values="8;10;8" dur="5s" repeatCount="indefinite" />
+                                </circle>
+                                <circle cx="150" cy="50" r="10" fill="rgba(139, 92, 246, 0.8)">
+                                    <animate attributeName="r" values="10;12;10" dur="6s" repeatCount="indefinite" />
+                                </circle>
+                                <circle cx="250" cy="50" r="8" fill="rgba(139, 92, 246, 0.8)">
+                                    <animate attributeName="r" values="8;10;8" dur="5s" repeatCount="indefinite" />
+                                </circle>
+                            </svg>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <span class="inline-block px-3 py-1 bg-accent/10 text-accent text-sm font-medium rounded-full mb-3">Python, Machine Learning</span>
+                        <h3 class="text-xl font-semibold mb-2">Predictive Maintenance System</h3>
+                        <p class="text-gray-400 mb-4">Created a machine learning-based predictive maintenance system using Python that can forecast equipment failures before they occur, reducing downtime.</p>
+                        <div class="flex justify-between items-center">
+                            <a href="#" class="text-secondary hover:text-white transition-colors">View Details</a>
+                            <div class="flex space-x-2">
+                                <span class="text-xs px-2 py-1 bg-gray-800 rounded-full">Python</span>
+                                <span class="text-xs px-2 py-1 bg-gray-800 rounded-full">ML</span>
+                                <span class="text-xs px-2 py-1 bg-gray-800 rounded-full">Data Analysis</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
-        // Initialize reveal on page load
-        reveal();
-    </script>
-</body>
-</html>
+    <!-- Contact Section -->
+    <section id="contact" class="section-padding bg-darker relative">
+        <div class="absolute inset-0 overflow-hidden">
+            <div class="absolute top-0 left-0 w-full h-full bg-[url('https://picsum.photos/id/2/1920/1080')] bg-cover bg-center opacity-5"></div>
+        </div>
+        
+        <div class="container mx-auto px-4 relative z-10">
+            <div class="text-center mb-16">
+                <h2 class="text-[clamp(1.8rem,5vw,3rem)] font-montserrat font-bold mb-4">Get In <span class="text-gradient">Touch</span></h2>
+                <div class="w-20 h-1 bg-secondary mx-auto"></div>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
+                <div>
+                    <h3 class="text-2xl font-montserrat font-semibold mb-6">Contact Information</h3>
+                    <p class="text-gray-400 mb-8">I'm always open to discussing new opportunities, projects, or just a friendly chat. Feel free to reach out using the information below or through the contact form.</p>
+                    
+                    <div class="space-y-6">
+                        <div class="flex items-start">
+                            <div class="bg-primary/10 p-3 rounded-full mr-4">
+                                <i class="fa fa-envelope text-primary text-xl"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-lg font-semibold mb-1">Email</h4>
+                                <p class="text-gray-400">andyooi2002@gmail.com</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-start">
+                            <div class="bg-primary/10 p-3 rounded-full mr-4">
+                                <i class="fa fa-phone text-primary text-xl"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-lg font-semibold mb-1">Phone</h4>
+                                <p class="text-gray-400">018-473 4745</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-start">
+                            <div class="bg-primary/10 p-3 rounded-full mr-4">
+                                <i class="fa fa-map-marker text-primary text-xl"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-lg font-semibold mb-1">Address</h4>
+                                <p class="text-gray-400">No 10-1-10, Taman Bukit Jaya, 02000, Sungai Petani, Kedah</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-start">
+                            <div class="bg-primary/10 p-3 rounded-full mr-4">
+                                <i class="fa fa-clock-o text-primary text-xl"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-lg font-semibold mb-1">Availability</h4>
+                                <p class="text-gray-400">Monday - Friday: 9am - 6pm</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="mt-12">
+                        <h4 class="text-lg font-semibold mb-4">Follow Me</h4>
+                        <div class="flex space-x-4">
+                            <a href="https://linkedin.com/in/andy-ooi-625706289" target="_blank" class="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center hover:bg-primary transition-colors">
+                                <i class="fa fa-linkedin"></i>
+                            </a>
+                            <a href="#" class="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center hover:bg-primary transition-colors">
+                                <i class="fa fa-github"></i>
+                            </a>
+                            <a href="#" class="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center hover:bg-primary transition-colors">
+                                <i class="fa fa-twitter"></i>
+                            </a>
+                            <a href="#" class="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center hover:bg-primary transition-colors">
+                                <i class="fa fa-instagram"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div>
+                    <h3 class="text-2xl font-montserrat font-semibold mb-6">Send Me a Message</h3>
+                    <form class="space-y-6">
+                        <div>
+                            <label for="name" class="block text-sm font-medium text-gray-300 mb-1">Your Name</label>
+                            <input type="text" id="name" class="w-full px-4 py-3 bg-gray-900 border border-gray-800 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary transition-all" placeholder="John Doe">
+                        
