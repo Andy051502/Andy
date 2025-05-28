@@ -1,267 +1,175 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Andy Ooi Jiale - Professional Portfolio</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.8/dist/chart.umd.min.js"></script>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Montserrat:wght@500;600;700;800&display=swap" rel="stylesheet">
-    
-    <!-- Tailwind Configuration -->
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        primary: '#4F46E5', // Indigo
-                        secondary: '#10B981', // Emerald
-                        accent: '#8B5CF6', // Violet
-                        dark: '#111827',
-                        darker: '#030712',
-                        light: '#F9FAFB'
-                    },
-                    fontFamily: {
-                        inter: ['Inter', 'sans-serif'],
-                        montserrat: ['Montserrat', 'sans-serif']
-                    },
-                    animation: {
-                        'float': 'float 6s ease-in-out infinite',
-                        'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
-                        'fade-in': 'fadeIn 0.8s ease-in-out',
-                        'slide-up': 'slideUp 0.8s ease-out',
-                        'scale-in': 'scaleIn 0.5s ease-out'
-                    },
-                    keyframes: {
-                        float: {
-                            '0%, 100%': { transform: 'translateY(0)' },
-                            '50%': { transform: 'translateY(-20px)' }
-                        },
-                        fadeIn: {
-                            '0%': { opacity: '0' },
-                            '100%': { opacity: '1' }
-                        },
-                        slideUp: {
-                            '0%': { transform: 'translateY(30px)', opacity: '0' },
-                            '100%': { transform: 'translateY(0)', opacity: '1' }
-                        },
-                        scaleIn: {
-                            '0%': { transform: 'scale(0.9)', opacity: '0' },
-                            '100%': { transform: 'scale(1)', opacity: '1' }
-                        }
-                    }
-                }
-            }
-        }
-    </script>
-    
-    <style type="text/tailwindcss">
-        @layer utilities {
-            .content-auto {
-                content-visibility: auto;
-            }
-            .text-shadow {
-                text-shadow: 0 2px 4px rgba(0,0,0,0.1);
-            }
-            .text-gradient {
-                background-clip: text;
-                -webkit-background-clip: text;
-                color: transparent;
-                background-image: linear-gradient(to right, #4F46E5, #8B5CF6);
-            }
-            .bg-glass {
-                background: rgba(17, 24, 39, 0.7);
-                backdrop-filter: blur(10px);
-            }
-            .card-hover {
-                transition: all 0.3s ease;
-            }
-            .card-hover:hover {
-                transform: translateY(-5px);
-                box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
-            }
-            .skill-bar {
-                height: 6px;
-                background: #374151;
-                border-radius: 3px;
-                overflow: hidden;
-            }
-            .skill-progress {
-                height: 100%;
-                border-radius: 3px;
-                transition: width 1.5s ease-in-out;
-            }
-            .section-padding {
-                padding: clamp(3rem, 8vw, 8rem) 0;
-            }
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Andy Ooi Jiale - Portfolio</title>
+  <style>
+    * {
+      margin: 0; padding: 0; box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: #0f172a;
+      color: #f8fafc;
+      line-height: 1.6;
+    }
+
+    header {
+      background: linear-gradient(to right, #1e3a8a, #2563eb);
+      padding: 60px 20px;
+      text-align: center;
+      animation: fadeIn 1.2s ease;
+    }
+
+    header h1 {
+      font-size: 3rem;
+      margin-bottom: 10px;
+    }
+
+    .typing {
+      color: #fcd34d;
+      font-size: 1.2rem;
+      font-weight: bold;
+      white-space: nowrap;
+      overflow: hidden;
+      border-right: 2px solid #fcd34d;
+      width: 0;
+      animation: typing 3s steps(40, end) forwards, blink 0.7s infinite;
+    }
+
+    section {
+      padding: 50px 20px;
+      max-width: 900px;
+      margin: auto;
+      opacity: 0;
+      transform: translateY(30px);
+      animation: fadeUp 1s forwards;
+    }
+
+    section:nth-child(even) {
+      background-color: #1e293b;
+    }
+
+    h2 {
+      color: #38bdf8;
+      margin-bottom: 20px;
+      font-size: 1.8rem;
+      border-bottom: 2px solid #38bdf8;
+      display: inline-block;
+      padding-bottom: 5px;
+    }
+
+    ul {
+      list-style: square;
+      padding-left: 20px;
+    }
+
+    a {
+      color: #fcd34d;
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: scale(0.95); }
+      to { opacity: 1; transform: scale(1); }
+    }
+
+    @keyframes fadeUp {
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes typing {
+      to { width: 100%; }
+    }
+
+    @keyframes blink {
+      50% { border-color: transparent; }
+    }
+
+    @media (max-width: 600px) {
+      header h1 {
+        font-size: 2rem;
+      }
+    }
+  </style>
 </head>
-<body class="font-inter bg-darker text-light overflow-x-hidden">
-    <!-- Navigation -->
-    <nav id="navbar" class="fixed w-full z-50 transition-all duration-300">
-        <div class="container mx-auto px-4 py-4 flex justify-between items-center">
-            <a href="#" class="text-2xl font-montserrat font-bold text-gradient">Andy Ooi</a>
-            
-            <!-- Desktop Menu -->
-            <div class="hidden md:flex space-x-8">
-                <a href="#about" class="nav-link hover:text-secondary transition-colors">About</a>
-                <a href="#skills" class="nav-link hover:text-secondary transition-colors">Skills</a>
-                <a href="#experience" class="nav-link hover:text-secondary transition-colors">Experience</a>
-                <a href="#projects" class="nav-link hover:text-secondary transition-colors">Projects</a>
-                <a href="#contact" class="nav-link hover:text-secondary transition-colors">Contact</a>
-            </div>
-            
-            <!-- Mobile Menu Button -->
-            <button id="menu-toggle" class="md:hidden text-light focus:outline-none">
-                <i class="fa fa-bars text-2xl"></i>
-            </button>
-        </div>
-        
-        <!-- Mobile Menu -->
-        <div id="mobile-menu" class="md:hidden hidden bg-glass border-t border-gray-800">
-            <div class="container mx-auto px-4 py-4 flex flex-col space-y-4">
-                <a href="#about" class="nav-link hover:text-secondary transition-colors py-2">About</a>
-                <a href="#skills" class="nav-link hover:text-secondary transition-colors py-2">Skills</a>
-                <a href="#experience" class="nav-link hover:text-secondary transition-colors py-2">Experience</a>
-                <a href="#projects" class="nav-link hover:text-secondary transition-colors py-2">Projects</a>
-                <a href="#contact" class="nav-link hover:text-secondary transition-colors py-2">Contact</a>
-            </div>
-        </div>
-    </nav>
+<body>
 
-    <!-- Hero Section -->
-    <section class="min-h-screen flex items-center relative overflow-hidden">
-        <div class="absolute inset-0 bg-darker z-0">
-            <div class="absolute top-0 left-0 w-full h-full bg-[url('https://picsum.photos/id/180/1920/1080')] bg-cover bg-center opacity-10"></div>
-            <div class="absolute inset-0 bg-gradient-to-b from-darker via-darker to-darker/90"></div>
-        </div>
-        
-        <div class="container mx-auto px-4 relative z-10">
-            <div class="flex flex-col md:flex-row items-center">
-                <div class="md:w-1/2 mb-10 md:mb-0">
-                    <h1 class="text-[clamp(2.5rem,8vw,5rem)] font-montserrat font-bold leading-tight mb-4">
-                        Hi, I'm <span class="text-gradient">Andy Ooi</span>
-                    </h1>
-                    <h2 class="text-[clamp(1.5rem,5vw,3rem)] font-montserrat font-semibold mb-6">
-                        Aspiring <span class="text-secondary">Computer Engineer</span>
-                    </h2>
-                    <p class="text-lg text-gray-300 mb-8 max-w-lg">
-                        Currently pursuing a degree in Computer Engineering at UniMAP, with a passion for embedded systems, IoT, and programming. Eager to apply my skills in an innovative internship environment.
-                    </p>
-                    <div class="flex flex-wrap gap-4">
-                        <a href="#contact" class="px-8 py-3 bg-primary hover:bg-primary/90 text-white font-medium rounded-full transition-all shadow-lg shadow-primary/20 hover:shadow-primary/30 hover:-translate-y-1">
-                            Get in Touch
-                        </a>
-                        <a href="#projects" class="px-8 py-3 bg-transparent border-2 border-secondary text-secondary hover:bg-secondary/10 font-medium rounded-full transition-all hover:-translate-y-1">
-                            View Projects
-                        </a>
-                    </div>
-                    
-                    <div class="mt-12 flex space-x-6">
-                        <a href="https://linkedin.com/in/andy-ooi-625706289" target="_blank" class="w-12 h-12 rounded-full bg-gray-800 flex items-center justify-center hover:bg-primary transition-colors">
-                            <i class="fa fa-linkedin text-xl"></i>
-                        </a>
-                        <a href="mailto:andyooi2002@gmail.com" class="w-12 h-12 rounded-full bg-gray-800 flex items-center justify-center hover:bg-primary transition-colors">
-                            <i class="fa fa-envelope text-xl"></i>
-                        </a>
-                        <a href="tel:0184734745" class="w-12 h-12 rounded-full bg-gray-800 flex items-center justify-center hover:bg-primary transition-colors">
-                            <i class="fa fa-phone text-xl"></i>
-                        </a>
-                    </div>
-                </div>
-                
-                <div class="md:w-1/2 relative">
-                    <div class="w-64 h-64 md:w-80 md:h-80 mx-auto relative z-10 animate-float">
-                        <div class="absolute inset-0 rounded-full bg-gradient-to-r from-primary to-accent opacity-20 blur-3xl"></div>
-                        <div class="absolute inset-0 rounded-full bg-primary/10 border-2 border-primary/20 animate-pulse-slow"></div>
-                        <img src="https://picsum.photos/id/64/400/400" alt="Andy Ooi Jiale" class="w-full h-full object-cover rounded-full border-4 border-gray-800 relative z-20">
-                    </div>
-                    <div class="absolute -bottom-6 -right-6 w-40 h-40 bg-secondary/20 rounded-full blur-3xl animate-pulse-slow"></div>
-                    <div class="absolute -top-6 -left-6 w-32 h-32 bg-accent/20 rounded-full blur-3xl animate-pulse-slow" style="animation-delay: 1s;"></div>
-                </div>
-            </div>
-        </div>
-        
-        <div class="absolute bottom-10 left-1/2 transform -translate-x-1/2 animate-bounce">
-            <a href="#about" class="text-light/70 hover:text-secondary transition-colors">
-                <i class="fa fa-chevron-down text-2xl"></i>
-            </a>
-        </div>
-    </section>
+<header>
+  <h1>Andy Ooi Jiale</h1>
+  <div class="typing">Aspiring Computer Engineer | Embedded Systems | IoT Enthusiast</div>
+</header>
 
-    <!-- About Section -->
-    <section id="about" class="section-padding bg-darker relative">
-        <div class="container mx-auto px-4">
-            <div class="text-center mb-16">
-                <h2 class="text-[clamp(1.8rem,5vw,3rem)] font-montserrat font-bold mb-4">About <span class="text-gradient">Me</span></h2>
-                <div class="w-20 h-1 bg-secondary mx-auto"></div>
-            </div>
-            
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
-                <div class="order-2 md:order-1">
-                    <h3 class="text-2xl font-montserrat font-semibold mb-6 text-light">
-                        A Passionate <span class="text-secondary">Computer Engineering</span> Student
-                    </h3>
-                    <p class="text-gray-300 mb-6 leading-relaxed">
-                        I'm currently pursuing a Bachelor of Computer Engineering with Honours at Universiti Malaysia Perlis (UniMAP), where I've maintained a CGPA of 3.62. My academic journey has been focused on developing expertise in embedded systems, IoT, and programming languages such as Verilog and C/C++.
-                    </p>
-                    <p class="text-gray-300 mb-8 leading-relaxed">
-                        Driven by curiosity and a passion for innovation, I'm eager to bring my problem-solving skills and energy to an exciting internship opportunity. My industrial training is scheduled from 29 July to 06 October 2025, and I'm actively seeking opportunities to apply my knowledge in real-world scenarios.
-                    </p>
-                    
-                    <div class="grid grid-cols-2 gap-6 mb-8">
-                        <div class="bg-gray-900/50 p-6 rounded-xl card-hover">
-                            <div class="text-3xl text-primary mb-3"><i class="fa fa-graduation-cap"></i></div>
-                            <h4 class="text-xl font-semibold mb-2">Education</h4>
-                            <p class="text-gray-400">UniMAP - Computer Engineering</p>
-                        </div>
-                        <div class="bg-gray-900/50 p-6 rounded-xl card-hover">
-                            <div class="text-3xl text-secondary mb-3"><i class="fa fa-briefcase"></i></div>
-                            <h4 class="text-xl font-semibold mb-2">Experience</h4>
-                            <p class="text-gray-400">IT Software Engineer Intern</p>
-                        </div>
-                        <div class="bg-gray-900/50 p-6 rounded-xl card-hover">
-                            <div class="text-3xl text-accent mb-3"><i class="fa fa-code"></i></div>
-                            <h4 class="text-xl font-semibold mb-2">Projects</h4>
-                            <p class="text-gray-400">2+ Completed Projects</p>
-                        </div>
-                        <div class="bg-gray-900/50 p-6 rounded-xl card-hover">
-                            <div class="text-3xl text-primary mb-3"><i class="fa fa-trophy"></i></div>
-                            <h4 class="text-xl font-semibold mb-2">Achievements</h4>
-                            <p class="text-gray-400">3x Dean's List</p>
-                        </div>
-                    </div>
-                    
-                    <a href="#contact" class="inline-flex items-center text-secondary hover:text-white transition-colors">
-                        Let's Connect <i class="fa fa-long-arrow-right ml-2"></i>
-                    </a>
-                </div>
-                
-                <div class="order-1 md:order-2 relative">
-                    <div class="relative z-10 rounded-2xl overflow-hidden shadow-2xl">
-                        <img src="https://picsum.photos/id/237/600/800" alt="Andy Ooi working on a project" class="w-full h-auto">
-                    </div>
-                    <div class="absolute -top-4 -right-4 w-32 h-32 bg-primary/20 rounded-lg blur-2xl"></div>
-                    <div class="absolute -bottom-4 -left-4 w-40 h-40 bg-secondary/20 rounded-lg blur-2xl"></div>
-                </div>
-            </div>
-            
-            <div class="mt-20 bg-gray-900/50 rounded-2xl p-8 md:p-12">
-                <h3 class="text-2xl font-montserrat font-semibold mb-8 text-center">Personal Details</h3>
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                    <div class="flex items-start">
-                        <div class="bg-primary/10 p-3 rounded-full mr-4">
-                            <i class="fa fa-envelope text-primary text-xl"></i>
-                        </div>
-                        <div>
-                            <h4 class="text-lg font-semibold mb-1">Email</h4>
-                            <p class="text-gray-400">andyooi2002@gmail.com</p>
-                        </div>
-                    </div>
-                    <div class="flex items-start">
-                        <div class="bg-primary/10 p-3 rounded-full mr-4">
-                            <i class="fa fa
+<section style="animation-delay: 0.2s">
+  <h2>About Me</h2>
+  <p>I am currently pursuing a Bachelor of Computer Engineering at UniMAP. I specialize in embedded systems, IoT, and programming languages like C, Python, and Verilog. I am passionate about innovation, technology, and solving real-world problems through smart systems.</p>
+</section>
+
+<section style="animation-delay: 0.4s">
+  <h2>Education</h2>
+  <ul>
+    <li><strong>UniMAP</strong> – Bachelor of Computer Engineering (2021–Present), CGPA: 3.62</li>
+  </ul>
+</section>
+
+<section style="animation-delay: 0.6s">
+  <h2>Work Experience</h2>
+  <ul>
+    <li><strong>Intern, IT Software Engineer</strong> – App House Sdn Bhd (2023)</li>
+    <li>Developed WordPress sites, WooCommerce integration, performance optimization</li>
+  </ul>
+</section>
+
+<section style="animation-delay: 0.8s">
+  <h2>Projects</h2>
+  <ul>
+    <li><strong>Traffic Light System</strong> – Simulated using Code::Blocks and waveform testing</li>
+    <li><strong>Car Parking Management</strong> – 8085-based system with simulation in My1Sim85</li>
+  </ul>
+</section>
+
+<section style="animation-delay: 1s">
+  <h2>Skills</h2>
+  <ul>
+    <li>Languages: C, Python, Verilog</li>
+    <li>Tools: LTspice, NI myRIO, MATLAB, Code::Blocks</li>
+    <li>Web: WordPress, WooCommerce, HTML/CSS</li>
+  </ul>
+</section>
+
+<section style="animation-delay: 1.2s">
+  <h2>Soft Skills</h2>
+  <ul>
+    <li>Teamwork, Communication, Time Management</li>
+    <li>Attention to Detail, Problem Solving</li>
+  </ul>
+</section>
+
+<section style="animation-delay: 1.4s">
+  <h2>Languages</h2>
+  <ul>
+    <li>English – Professional</li>
+    <li>Malay – Professional</li>
+    <li>Chinese – Full Proficiency</li>
+    <li>Cantonese – Native</li>
+  </ul>
+</section>
+
+<section style="animation-delay: 1.6s">
+  <h2>Contact</h2>
+  <ul>
+    <li>Email: <a href="mailto:andyooi2002@gmail.com">andyooi2002@gmail.com</a></li>
+    <li>Phone: 018-473 4745</li>
+    <li>LinkedIn: <a href="https://www.linkedin.com/in/andy-ooi-625706289" target="_blank">andy-ooi-625706289</a></li>
+    <li>Location: Penang, Malaysia</li>
+  </ul>
+</section>
+
+</body>
+</html>
