@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Track Parcel</title>
+  <style>
+    /* Similar styles as your registration page */
+    body { font-family: Arial, sans-serif; padding: 40px; background: #f4f4f4; }
+    .container { max-width: 400px; margin: auto; padding: 20px; background: white; border-radius: 8px; box-shadow: 0 0 10px rgba(0,0,0,0.1); }
+    h2 { text-align: center; color: #333; }
+    label { display: block; margin-top: 15px; font-weight: bold; }
+    input { width: 100%; padding: 10px; margin-top: 5px; border-radius: 4px; border: 1px solid #ccc; }
+    button { margin-top: 20px; width: 100%; padding: 12px; background-color: #007BFF; color: white; border: none; border-radius: 5px; font-size: 16px; cursor: pointer; }
+    button:hover { background-color: #0056b3; }
+    .result { margin-top: 20px; padding: 15px; border-radius: 5px; }
+    .result.success { background-color: #e6f7ed; color: #005928; }
+    .result.error { background-color: #ffe6e6; color: #c62828; }
+    .loading { text-align: center; margin: 20px 0; display: none; }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <h2>Track Your Parcel</h2>
+  <label for="pickupCode">Pickup Code</label>
+  <input type="text" id="pickupCode" placeholder="Enter your 4-digit code" required>
+
+  <button onclick="trackParcel()">Track Parcel</button>
+  
+  <div class="loading" id="loading">
+    <p>Checking parcel status...</p>
+  </div>
+  
+  <div class="result" id="result" style="display: none;"></div>
+</div>
+
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-database-compat.js"></script>
+<script>
+  // Your Firebase config (same as before)
+  const firebaseConfig = {
+    apiKey: "AIzaSyCLoF99P6IgNGVcpfu86XOoxDAaX32S8Gw",
+    authDomain: "smartparcellocker-abfda.firebaseapp.com",
+    databaseURL: "https://smartparcellocker-abfda-default-rtdb.asia-southeast1.firebasedatabase.app",
+    projectId: "smartparcellocker-abfda",
+    storageBucket: "smartparcellocker-abfda.firebasestorage.app",
+    messagingSenderId: "840948905793",
+    appId: "1:840948905793:web:9d43e7af5df96917bbd3c0",
+    measurementId: "G-L3M5C0BP6L"
+  };
+  firebase.initializeApp(firebaseConfig);
+  const database = firebase.database();
+
+  function trackParcel() {
+    const code = document.getElementById("pickupCode").value.trim();
+    const resultEl = document.getElementById("result");
+    const loadingEl = document.getElementById("loading");
+    
+    if (!code || code.length !== 4) {
+      resultEl.className = "result error";
+      resultEl.innerHTML = "<strong>Error:</strong> Please enter a valid 4-digit code.";
+      resultEl.style.display = "block";
+      return;
+    }
+    
+    loadingEl.style.display = "block";
+    resultEl.style.display = "none";
+    
+    // Query Firebase for the parcel with this pickup code
+    database.ref('parcels').orderByChild('pickupCode').equalTo(code).once('value')
+      .then(snapshot => {
+        if (snapshot.exists()) {
+          const parcel = snapshot.val();
+          const parcelId = Object.keys(parcel)[0];
+          const data = parcel[parcelId];
+          
+          // Format timestamp to a readable date
+          const date = new Date(data.registrationTime * 1000);
+          const formattedDate = date.toLocaleDateString() + " " + date.toLocaleTimeString();
+          
+          // Build result message
+          let status = data.isPickedUp ? "Picked Up" : "Ready for Pickup";
+          let statusClass = data.isPickedUp ? "result success" : "result";
+          
+          resultEl.className = statusClass;
+          resultEl.innerHTML = `
+            <strong>Parcel Status:</strong> ${status}<br>
+            <strong>Name:</strong> ${data.name}<br>
+            <strong>Parcel Number:</strong> ${data.parcelNumber}<br>
+            <strong>Registration Time:</strong> ${formattedDate}
+          `;
+          resultEl.style.display = "block";
+        } else {
+          throw new Error("Invalid pickup code or parcel not found.");
+        }
+      })
+      .catch(error => {
+        resultEl.className = "result error";
+        resultEl.innerHTML = `<strong>Error:</strong> ${error.message}`;
+        resultEl.style.display = "block";
+      })
+      .finally(() => {
+        loadingEl.style.display = "none";
+      });
+  }
+</script>
+
+</body>
+</html>
