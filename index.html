@@ -55,6 +55,11 @@
       font-weight: bold;
       color: green;
     }
+    .loading {
+      display: none;
+      margin-top: 20px;
+      text-align: center;
+    }
   </style>
 </head>
 <body>
@@ -75,30 +80,87 @@
 
   <button onclick="register()">Register</button>
 
+  <div class="loading" id="loading">
+    <p>Registering your parcel...</p>
+  </div>
+
   <div class="result" id="generatedNumber"></div>
 </div>
 
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-database-compat.js"></script>
 <script>
+  // Your web app's Firebase configuration
+  const firebaseConfig = {
+    apiKey: "AIzaSyCLoF99P6IgNGVcpfu86XOoxDAaX32S8Gw",
+    authDomain: "smartparcellocker-abfda.firebaseapp.com",
+    databaseURL: "https://smartparcellocker-abfda-default-rtdb.asia-southeast1.firebasedatabase.app",
+    projectId: "smartparcellocker-abfda",
+    storageBucket: "smartparcellocker-abfda.firebasestorage.app",
+    messagingSenderId: "840948905793",
+    appId: "1:840948905793:web:9d43e7af5df96917bbd3c0",
+    measurementId: "G-L3M5C0BP6L"
+  };
+  // Initialize Firebase
+  firebase.initializeApp(firebaseConfig);
+  const database = firebase.database();
+
   function register() {
-    // You can also add validation here if needed
+    // Show loading state
+    document.getElementById("loading").style.display = "block";
+    document.getElementById("generatedNumber").textContent = "";
+
     const name = document.getElementById("name").value;
     const parcel = document.getElementById("parcel").value;
     const matric = document.getElementById("matric").value;
     const phone = document.getElementById("phone").value;
 
-    if (!name  !parcel  !matric || !phone) {
+    if (!name || !parcel || !matric || !phone) {
       alert("Please fill in all fields!");
+      document.getElementById("loading").style.display = "none";
       return;
     }
 
     // Generate a random 4-digit number
     const generatedCode = Math.floor(1000 + Math.random() * 9000);
 
-    // Show the generated number
-    document.getElementById("generatedNumber").textContent = 
-      "Your Code: " + generatedCode;
+    // Prepare data to save
+    const parcelData = {
+      name: name,
+      parcelNumber: parcel,
+      matricNumber: matric,
+      phoneNumber: phone,
+      registrationTime: firebase.database.ServerValue.TIMESTAMP,
+      pickupCode: generatedCode,
+      isPickedUp: false
+    };
+
+    // Save to Firebase
+    database.ref('parcels').push(parcelData)
+      .then(() => {
+        document.getElementById("generatedNumber").textContent = 
+          "Your Code: " + generatedCode;
+        // Clear form
+        document.getElementById("name").value = "";
+        document.getElementById("parcel").value = "";
+        document.getElementById("matric").value = "";
+        document.getElementById("phone").value = "";
+      })
+      .catch((error) => {
+        alert("Error registering parcel: " + error.message);
+        console.error("Firebase error:", error);
+      })
+      .finally(() => {
+        document.getElementById("loading").style.display = "none";
+      });
   }
+
+  // Optional: Listen for new parcels (for admin dashboard maybe)
+  database.ref('parcels').on('child_added', (snapshot) => {
+    const parcel = snapshot.val();
+    console.log("New parcel registered:", parcel);
+  });
 </script>
 
 </body>
-</html>
+</html>  
